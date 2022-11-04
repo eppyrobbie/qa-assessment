@@ -6,6 +6,8 @@ function shuffleArray(array) {
     }
     return arrCopy
 }
+// console.log(shuffleArray([1, 2, 3, 4]))
+// console.log(shuffleArray([4, 3, 2, 1]))
 
 module.exports = {
     shuffleArray

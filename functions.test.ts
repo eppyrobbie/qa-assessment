@@ -1,5 +1,8 @@
 const {shuffleArray} = require('./utils')
 
 describe('shuffleArray should', () => {
-    // CODE HERE
+   expect(shuffleArray.length).toBe(shuffleArray.length);
+   expect(shuffleArray.length).not.toBe(4)
 })
+
+

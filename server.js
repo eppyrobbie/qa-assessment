@@ -6,6 +6,30 @@ const {shuffleArray} = require('./utils')
 
 
 app.use(express.json())
+// app.use(express.static('public')) 
+//--I feel like I'm reading this endpoint stuff and trying to really understand. I'll need to obviously go over this and study it because I'm unable to figure this part out, I'm not going to be able to accurately test for bugs. However, I will do the test plans and bug reports as the app is currently working for me--
+// app.use('/styles')
+// app.use('/')
+
+// app.get('/', (req, res) => {
+//     res.send('Hello World!')
+//   })
+  
+//   app.listen(3000)
+
+
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'eff9e545a5ba4693ad5caadf9d12fdf9',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
+
+
 
 
 app.get('/api/robots', (req, res) => {

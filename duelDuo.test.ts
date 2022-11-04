@@ -18,3 +18,15 @@ test('Title shows up when page loads', async () => {
     const displayed = await title.isDisplayed()
     expect(displayed).toBe(true)
 })
+
+test('Draw button gives choices',async () => {
+    const title = await driver.findElement(By.id('choices'))
+    const displayed = await title.isDisplayed()
+    expect(displayed).toBe(true)
+})
+
+test('Add to Duo displays correctly', async () => {
+    const title = await driver.findElement(By.id('player-duo'))
+    const displayed = await title.isDisplayed()
+    expect(displayed).toBe(true)
+})

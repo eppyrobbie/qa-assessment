@@ -6,6 +6,11 @@ const {shuffleArray} = require('./utils')
 
 
 app.use(express.json())
+
+
+
+
+
 // app.use(express.static('public')) 
 //--I feel like I'm reading this endpoint stuff and trying to really understand. I'll need to obviously go over this and study it because I'm unable to figure this part out, I'm not going to be able to accurately test for bugs. However, I will do the test plans and bug reports as the app is currently working for me--
 // app.use('/styles')
@@ -29,13 +34,27 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+app.get('/', (req, res) => {
+    rollbar.info('A user visited your website.')
+    res.sendFile(path.join(__dirname, './public/index.html'))
+})
 
+app.get('/styles', (req, res) => {
+
+    res.sendFile(path.join(__dirname, './public/index.css'))
+})
+
+app.get('/js', (req, res) => {
+
+    res.sendFile(path.join(__dirname, './public/index.js'))
+})
 
 
 app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
+        rollbar.error('All bots could not be fetched')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -48,7 +67,7 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
-        console.log('ERROR GETTING FIVE BOTS', error)
+        rollbar.critical('No bot choices loading')
         res.sendStatus(400)
     }
 })
@@ -79,6 +98,7 @@ app.post('/api/duel', (req, res) => {
             res.status(200).send('You won!')
         }
     } catch (error) {
+        rollbar.warning('App broken')
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
     }
